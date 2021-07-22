@@ -110,24 +110,3 @@ document.querySelectorAll("[href]").forEach(function (link) {
         link.href = target.href;
     }
 });
-
-
-document.querySelectorAll("[href]").forEach(function (link) {
-    var current = link.href;
-    console.log(current , current.startsWith('https://secure.insurely.ca/'))
-    if (current.startsWith('https://secure.insurely.ca/')) {
-        console.log('update params');
-        var currentCookies = document.cookie.split(";").reduce(function (ac, cv, i) {
-            return Object.assign(ac, _defineProperty({}, cv.split('=')[0], cv.split('=')[1]));
-        }, {});
-        var target = new URL(current);
-
-        for (var key in currentCookies) {
-            if (key.trim().startsWith('utm') === true) {
-                target.searchParams.set(key, currentCookies[key]);
-            }
-        }
-
-        link.href = target.href;
-    }
-});
